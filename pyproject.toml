@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PACKAGE_NAME"
+readme = "README.md"
+requires-python = "~=3.10"
+authors = [{ name = "AUTHOR_NAME", email = "AUTHOR_EMAIL" }]
+dependencies = [
+  "pandas",
+  "numpy",
+  "scipy",
+  "seaborn",
+  "matplotlib",
+  "jupyterlab",
+]
+description = "DESCRIPTION"
+license = { file = "LICENSE" }
+version = "0.0.1"
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+]
+docs = ["sphinx", "memory_profiler", "myst-parser", "pydata-sphinx-theme"]
+
+[tool.ruff]
+ignore = ["E501"]
+select = ["E", "F", "I", "W"]
+line-length = 79
+fixable = ["I"]
+exclude = [".env", ".venv", "venv", "notebooks"]
+show-source = true
+
+[tool.black]
+line-length = 79
+extend-exclude = '''
+/(
+  | .env
+  | .venv
+  | venv
+  | notebooks
+)/
+'''
+
+[tool.coverage.run]
+branch = true
+parallel = true
+
