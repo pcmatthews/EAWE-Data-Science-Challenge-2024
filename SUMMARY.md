@@ -1,4 +1,5 @@
 # Table of contents
 
 * [README](README.md)
-* [Code of Conduct](CODE_OF_CONDUCT.md)
+* [Code of Conduct](CODE\_OF\_CONDUCT.md)
+* [CONTRIBUTING](contributing.md)
