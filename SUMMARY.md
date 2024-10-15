@@ -2,4 +2,4 @@
 
 * [README](README.md)
 * [Code of Conduct](CODE\_OF\_CONDUCT.md)
-* [CONTRIBUTING](contributing.md)
+* [CONTRIBUTING](CONTRIBUTING.md)
