@@ -1,7 +1,3 @@
-# CONTRIBUTING
+# Contributing
 
-## Getting started
-
-Please create your own fork of this repository and work directly on your private fork. At the end of the challenge we will merge your code back into this repo via pull requests.
-
-##
+Please refer to [README](./) and [Code of Conduct](CODE\_OF\_CONDUCT.md).&#x20;
