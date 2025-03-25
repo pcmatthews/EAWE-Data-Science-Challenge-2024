@@ -68,6 +68,8 @@ d_filter = d_bot & d_up
 
 data_filter = data_range[d_filter]
 
+max_RPM = max(data_filter.TurbSpeed2)
+
 # and plot
 data_filter.plot(x='TurbSpeed2', y='RST2', kind='scatter', title='Sub Challenge 2 date range, torque filter')
 plt.show()
@@ -86,7 +88,7 @@ y = np.array(data_filter.RST2) # target
 model = KNeighborsRegressor(n_neighbors=10, weights='uniform') # params guessed
 model.fit(x,y)
 
-x_range = np.linspace(0, 80, 100).reshape(-1,1)
+x_range = np.linspace(0, max_RPM, 100).reshape(-1,1)
 y_est = model.predict(x_range)
 
 # plot
@@ -113,7 +115,7 @@ y = np.array(data_filter2.RST2) # target
 model2 = KNeighborsRegressor(n_neighbors=10, weights='uniform') # params guessed
 model2.fit(x,y)
 
-x_range = np.linspace(0, 80, 100).reshape(-1,1)
+x_range = np.linspace(0, max_RPM, 100).reshape(-1,1)
 y_est = model2.predict(x_range)
 
 # plot
@@ -123,13 +125,26 @@ plt.plot(x_range, y_est, c='r')
 
 plt.show()
 
+# compare to Set Point
+plt.figure()
+data_filter2.plot(x='TurbSpeed2', y='GenTorqSP', kind='scatter', title='Comparison to Set Point')
+plt.plot(x_range, y_est, c='r')
+
+plt.show()
+
+plt.figure()
+data_filter2.plot(x='TurbSpeed2', y='GenTorqSP', kind='scatter', c='g', title='Comparison to Set Point', label='Set Point')
+plt.scatter(data_filter2.TurbSpeed2, data_filter2.RST2,  alpha=0.3, label='Observed')
+plt.plot(x_range, y_est, c='r', label='Estimator')
+plt.legend(loc='upper left')
+plt.show()
 
 # create CSV file with lookup TurbSpeed2 -> RST2
 
 fname = "Sub-challenge-2_8_1.csv" # last digit is the submission number
 
 # create dataframe with lookup
-x_range = np.linspace(0,data_filter2.TurbSpeed2.max(), 100).reshape(-1,1)
+x_range = np.linspace(0,max_RPM, 100).reshape(-1,1)
 y_est = model2.predict(x_range)
 
 submit = pd.DataFrame({'TurbSpeed2':x_range.ravel(), 'RTS2':y_est})
